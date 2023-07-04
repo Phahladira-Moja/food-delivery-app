@@ -30,7 +30,9 @@ const CartIcon = () => {
           View Cart
         </Text>
 
-        <Text className="font-extrabold text-white text-lg">${cartTotal}</Text>
+        <Text className="font-extrabold text-white text-lg">
+          ${cartTotal.toFixed(2)}
+        </Text>
       </TouchableOpacity>
     </View>
   );

@@ -7,8 +7,18 @@ import { themeColors } from "../theme";
 import Categories from "../components/Categories";
 import { featured } from "../constants";
 import FeaturedRow from "../components/FeaturedRow";
+import { useEffect, useState } from "react";
+import { getFeaturedRestaurants } from "../api";
 
 const HomeScreen = () => {
+  const [featuredRestaurants, setFeaturedRestaurants] = useState([]);
+
+  useEffect(() => {
+    getFeaturedRestaurants().then((data) => {
+      setFeaturedRestaurants(data);
+    });
+  }, []);
+
   return (
     <SafeAreaView className="bg-white">
       <StatusBar barStyle="dark-content" />
@@ -47,11 +57,11 @@ const HomeScreen = () => {
 
         {/* featured */}
         <View className="mt-5">
-          {[featured, featured, featured].map((item, index) => {
+          {featuredRestaurants.map((item, index) => {
             return (
               <FeaturedRow
                 key={index}
-                title={item.title}
+                title={item.name}
                 restaurants={item.restaurants}
                 description={item.description}
               />

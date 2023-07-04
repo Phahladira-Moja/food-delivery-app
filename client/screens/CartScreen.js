@@ -11,6 +11,7 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../slices/cartSlice";
+import { urlFor } from "../sanity";
 
 const CartScreen = () => {
   const restaurant = useSelector(selectRestaurant);
@@ -88,13 +89,16 @@ const CartScreen = () => {
               <Text className="font-bold" style={{ color: themeColors.text }}>
                 {items.length} x
               </Text>
-              <Image className="h-14 w-14 rounded-full" source={dish.image} />
+              <Image
+                className="h-14 w-14 rounded-full"
+                source={{ uri: urlFor(dish.image).url() }}
+              />
               <Text className="flex-1 font-bold text-gray-700">
                 {dish.name}
               </Text>
               <Text className="font-semibold text-base">${dish.price}</Text>
               <TouchableOpacity
-                onPress={() => dispatch(removeFromCart({ id: dish.id }))}
+                onPress={() => dispatch(removeFromCart({ id: dish._id }))}
                 className="p-1 rounded-full"
                 style={{ backgroundColor: themeColors.bgColor(1) }}
               >
@@ -135,6 +139,7 @@ const CartScreen = () => {
         <View>
           <TouchableOpacity
             onPress={() => navigation.navigate("OrderPreparing")}
+            disabled={!cartItems.length}
             style={{
               backgroundColor: themeColors.bgColor(1),
             }}

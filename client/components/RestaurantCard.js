@@ -3,6 +3,7 @@ import React from "react";
 import * as Icon from "react-native-feather";
 import { themeColors } from "../theme";
 import { useNavigation } from "@react-navigation/native";
+import { urlFor } from "../sanity";
 
 const RestaurantCard = ({ item }) => {
   const navigation = useNavigation();
@@ -18,7 +19,10 @@ const RestaurantCard = ({ item }) => {
         }}
         className="mr-6 bg-white rounded-3xl shadow-lg"
       >
-        <Image source={item.image} className="h-36 w-64 rounded-t-3xl" />
+        <Image
+          source={{ uri: urlFor(item.image).url() }}
+          className="h-36 w-64 rounded-t-3xl"
+        />
         <View className="px-3 pb-4 space-y-2">
           <Text className="text-lg font-bold pt-2">{item.name}</Text>
           <View className="flex-row items-center space-x-1">
@@ -30,7 +34,7 @@ const RestaurantCard = ({ item }) => {
               <Text className="text-green-700">{item.stars}</Text>
               <Text className="text-gray-700">
                 ({item.reviews}) review •{" "}
-                <Text className="font-semibold">{item.category}</Text>
+                <Text className="font-semibold">{item?.type?.name}</Text>
               </Text>
             </Text>
           </View>
