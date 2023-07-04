@@ -58,7 +58,6 @@ const CartScreen = () => {
               className="flex-row items-center space-x-3 py-2 px-4 bg-white rounded-3xl mx-2 mb-3 shadow-md"
             >
               <Text className="font-bold" style={{ color: themeColors.text }}>
-                {" "}
                 2 x{" "}
               </Text>
               <Image className="h-14 w-14 rounded-full" source={dish.image} />
